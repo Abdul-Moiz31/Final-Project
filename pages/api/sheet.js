@@ -9,7 +9,12 @@ export default async function handler(req, res) {
 
   try {
     const auth = new google.auth.GoogleAuth({
-      credentials: JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS), 
+      credentials: {
+        client_email: process.env.CLIENT_EMAIL,
+        client_id: process.env.CLIENT_ID,
+        private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+        
+      },
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     });
 
