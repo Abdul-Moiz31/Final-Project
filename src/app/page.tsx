@@ -58,7 +58,7 @@ export default function Component() {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="text-3xl font-bold text-cyan-300"
             >
-              AI.co
+              Quickstart Ai
             </motion.h1>
             <motion.div 
               initial={{ x: 50, opacity: 0 }}
