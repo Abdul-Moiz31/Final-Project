@@ -15,7 +15,7 @@ export default function Component() {
     setError('')
 
     try {
-      const response = await fetch('http://localhost:3000/api/sheet', { 
+      const response = await fetch('/api/sheet', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
