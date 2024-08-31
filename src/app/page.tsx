@@ -2,14 +2,16 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa'
-
+import "./globals.css"
 export default function Component() {
   const [email, setEmail] = useState('')
   const [showThankYou, setShowThankYou] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [loading ,setLoading]=useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setLoading(true)
     e.preventDefault()
     setIsSubmitting(true)
     setError('')
@@ -33,6 +35,7 @@ export default function Component() {
       setError('An error occurred. Please try again.')
       console.error('Error:', err)
     } finally {
+      setLoading(false);
       setIsSubmitting(false)
     }
   }
@@ -184,6 +187,32 @@ export default function Component() {
             </motion.div>
           </motion.div>
         )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {
+          loading && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+            >
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                className="bg-white rounded-2xl p-8 max-w-md w-full text-center"
+              >
+                <h2 className="text-3xl font-bold mb-4 text-teal-600">Loading...</h2>
+                
+                
+              </motion.div>
+            </motion.div>
+          )
+
+        }
       </AnimatePresence>
     </div>
   )
